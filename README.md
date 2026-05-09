@@ -7,8 +7,6 @@ Application de gestion d'évènements avec inscriptions en ligne et contrôle de
 
 ## Démo déployée (visionner en ligne)
 
-Instance d’exemple (Coolify / domaines de test) — à adapter si vos URLs diffèrent :
-
 | Ressource | URL |
 |-----------|-----|
 | **Application (frontend)** | https://frontend.event.test.salathia.pro |
@@ -16,6 +14,8 @@ Instance d’exemple (Coolify / domaines de test) — à adapter si vos URLs dif
 | **Swagger UI** (documentation interactive) | https://backend.event.test.salathia.pro/swagger-ui.html |
 | **OpenAPI JSON** | https://backend.event.test.salathia.pro/v3/api-docs |
 | **Console H2** | en général réservée au local : `http://localhost:8080/h2-console` (à ne pas exposer sur Internet en production) |
+
+**Espace admin (démo)** : sur le frontend déployé, utilisez **les mêmes identifiants par défaut** que pour le démarrage local (voir section *Compte admin par défaut* plus bas) — email `admin@event.local`, mot de passe `Admin123!` — pour vous connecter et consulter la partie administration (liste, édition, inscriptions). À changer absolument sur une instance personnelle ou en production réelle.
 
 En local, les équivalents sont `http://localhost:3000` (frontend), `http://localhost:8080` (API), `http://localhost:8080/swagger-ui.html` (Swagger).
 
