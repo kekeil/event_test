@@ -27,12 +27,13 @@ export default async function EventsPage({
 
   return (
     <main className="container mx-auto max-w-6xl px-4 py-8">
-      <div className="mb-8 flex flex-col gap-2">
-        <h1 className="text-3xl font-semibold tracking-tight">
+      <div className="mb-8 rounded-2xl border bg-hero-gradient p-6 sm:p-8">
+        <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
           Évènements à venir
         </h1>
-        <p className="text-muted-foreground text-sm">
-          Parcourez les évènements publics et inscrivez-vous en ligne.
+        <p className="mt-2 max-w-xl text-sm text-muted-foreground sm:text-base">
+          Parcourez les évènements publics et inscrivez-vous en ligne en
+          quelques secondes.
         </p>
       </div>
       <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
