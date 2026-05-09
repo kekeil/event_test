@@ -23,12 +23,8 @@ export async function Header() {
       <div className="container mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
         <Link
           href="/events"
-          className="text-foreground inline-flex items-center gap-2 text-lg font-semibold tracking-tight transition-opacity hover:opacity-90"
+          className="text-foreground text-base font-semibold tracking-tight transition-opacity hover:opacity-80"
         >
-          <span
-            className="from-primary to-fuchsia-500 inline-flex size-2.5 shrink-0 rounded-full bg-gradient-to-br shadow-sm ring-2 ring-background"
-            aria-hidden
-          />
           Events
         </Link>
         <div className="flex items-center gap-2">

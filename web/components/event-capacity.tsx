@@ -1,6 +1,6 @@
 "use client";
 
-import { TrendingUp, Users } from "lucide-react";
+import { Users } from "lucide-react";
 
 import { Progress } from "@/components/ui/progress";
 import type { EventDto } from "@/lib/types";
@@ -17,46 +17,32 @@ export function EventCapacity({ event }: EventCapacityProps) {
       ? Math.min(100, Math.round((taken / event.capacity) * 100))
       : 0;
 
-  const tone =
-    pct >= 100 ? "destructive" : pct >= 80 ? "amber" : "emerald";
-
-  const toneClass = {
-    destructive: "text-destructive",
-    amber: "text-amber-600 dark:text-amber-400",
-    emerald: "text-emerald-600 dark:text-emerald-400",
-  }[tone];
+  const full = pct >= 100;
+  const tight = pct >= 80;
 
   return (
-    <div className="bg-card relative flex flex-col gap-4 overflow-hidden rounded-xl border p-5 shadow-sm">
-      <div
-        className="pointer-events-none absolute -right-10 -top-10 size-36 rounded-full bg-primary/20 blur-2xl"
-        aria-hidden
-      />
-      <div
-        className="bg-chart-4/20 pointer-events-none absolute -bottom-12 -left-8 size-32 rounded-full blur-2xl"
-        aria-hidden
-      />
-
-      <div className="relative flex items-center justify-between gap-2">
-        <div className="text-muted-foreground flex items-center gap-2 text-sm font-medium">
+    <div className="flex flex-col gap-3 rounded-lg border bg-card p-5">
+      <div className="flex items-center justify-between gap-2">
+        <div className="text-muted-foreground flex items-center gap-2 text-sm">
           <Users className="size-4" />
           Capacité
         </div>
-        <div className={cn("flex items-center gap-1 text-sm font-semibold", toneClass)}>
-          <TrendingUp className="size-4" />
+        <span
+          className={cn(
+            "text-sm font-semibold",
+            full ? "text-destructive" : tight ? "text-foreground" : "text-muted-foreground",
+          )}
+        >
           {pct}%
-        </div>
+        </span>
       </div>
-
-      <div className="relative">
-        <p className="text-2xl leading-none font-bold">
-          {event.remainingSeats}
-          <span className="text-muted-foreground ml-1 text-sm font-normal">
-            places restantes sur {event.capacity}
-          </span>
-        </p>
-        <Progress value={pct} className="mt-3 h-2.5" />
-      </div>
+      <p className="text-2xl font-bold leading-none">
+        {event.remainingSeats}
+        <span className="text-muted-foreground ml-1.5 text-sm font-normal">
+          places restantes sur {event.capacity}
+        </span>
+      </p>
+      <Progress value={pct} className="h-2" />
     </div>
   );
 }

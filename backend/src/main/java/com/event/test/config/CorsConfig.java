@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -16,6 +17,10 @@ import lombok.extern.slf4j.Slf4j;
  * CORS avec {@link CorsConfiguration#setAllowedOriginPatterns} : compatible {@code allowCredentials=true}
  * (wildcards possibles) et correspondance exacte des origines sans slash final indésirable.
  * Les pré-flights {@code OPTIONS} sont aussi autorisés côté sécurité et court-circuités dans le filtre JWT.
+ * <p>
+ * Avec {@code allowCredentials=true}, les navigateurs refusent {@code Access-Control-Allow-Headers: *} sur la
+ * réponse preflight : il faut lister explicitement les en-têtes (ex. {@code Authorization}, {@code Content-Type}),
+ * sinon les POST/PUT/DELETE échouent avec « CORS » et code d'état {@code (null)} alors que les GET simples passent.
  */
 @Configuration
 @Slf4j
@@ -37,7 +42,15 @@ public class CorsConfig {
 		configuration.setAllowedOriginPatterns(origins);
 
 		configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
-		configuration.setAllowedHeaders(List.of("*"));
+		// Pas de "*" ici tant que allowCredentials=true (réponse preflight rejetée par le navigateur).
+		configuration.setAllowedHeaders(List.of(
+				HttpHeaders.AUTHORIZATION,
+				HttpHeaders.CONTENT_TYPE,
+				HttpHeaders.ACCEPT,
+				HttpHeaders.ACCEPT_LANGUAGE,
+				HttpHeaders.ORIGIN,
+				"X-Requested-With",
+				"Cache-Control"));
 		configuration.setExposedHeaders(List.of("Location"));
 		configuration.setAllowCredentials(true);
 		configuration.setMaxAge(3600L);

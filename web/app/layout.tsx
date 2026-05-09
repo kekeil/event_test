@@ -29,7 +29,7 @@ export default function RootLayout({
         geist.variable,
       )}
     >
-      <body className="bg-app-mesh min-h-screen">
+      <body className="min-h-screen bg-background">
         <ThemeProvider>
           <Header />
           {children}

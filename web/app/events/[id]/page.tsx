@@ -5,7 +5,6 @@ import {
   CalendarDays,
   Info,
   MapPin,
-  Sparkles,
   Users,
 } from "lucide-react";
 
@@ -39,102 +38,83 @@ export default async function EventDetailPage({ params }: PageProps) {
     <main className="container mx-auto max-w-5xl px-4 py-8">
       <Link
         href="/events"
-        className="text-muted-foreground hover:text-primary mb-6 inline-flex items-center gap-1.5 text-sm transition-colors"
+        className="text-muted-foreground hover:text-foreground mb-6 inline-flex items-center gap-1.5 text-sm transition-colors"
       >
         <ArrowLeft className="size-4" />
         Retour à la liste
       </Link>
 
       {/* Hero */}
-      <section className="animate-fade-up relative overflow-hidden rounded-3xl border bg-hero-gradient p-6 sm:p-10">
-        <div
-          className="pointer-events-none absolute -right-12 top-0 size-40 rounded-full bg-primary/15 blur-3xl"
-          aria-hidden
-        />
-        <div className="relative flex flex-wrap items-start justify-between gap-4">
-          <div className="flex max-w-4xl flex-col gap-4">
-            <div className="flex flex-wrap items-center gap-2">
-              {event.isFull ? (
-                <Badge variant="destructive" className="animate-soft-pulse">
-                  Complet
-                </Badge>
-              ) : (
-                <Badge
-                  variant="outline"
-                  className="border-emerald-500/50 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
-                >
-                  <Sparkles className="mr-1 size-3" />
-                  Inscriptions ouvertes
-                </Badge>
-              )}
-            </div>
-            <h1 className="text-3xl font-bold tracking-tight sm:text-5xl">
+      <section className="animate-fade-up rounded-xl border bg-hero-gradient p-6 sm:p-8">
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <div className="flex max-w-3xl flex-col gap-3">
+            {event.isFull ? (
+              <Badge variant="destructive" className="w-fit">
+                Complet
+              </Badge>
+            ) : (
+              <Badge variant="outline" className="w-fit text-muted-foreground">
+                Inscriptions ouvertes
+              </Badge>
+            )}
+            <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
               {event.title}
             </h1>
           </div>
         </div>
       </section>
 
-      <div className="animate-fade-up-delay-1 mt-6 grid gap-6 lg:grid-cols-[1fr_minmax(320px,400px)]">
-        {/* Colonne gauche : infos + description */}
+      <div className="animate-fade-up-delay-1 mt-6 grid gap-6 lg:grid-cols-[1fr_minmax(300px,380px)]">
+        {/* Colonne gauche */}
         <div className="flex flex-col gap-6">
-          {/* Stats cards */}
+          {/* Stats */}
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-            <Card
-              className="border-l-4"
-              style={{ borderLeftColor: "var(--chart-1)" }}
-            >
+            <Card>
               <CardContent className="flex flex-col gap-1 p-4">
-                <div className="text-muted-foreground flex items-center gap-2 text-xs font-medium uppercase">
+                <div className="text-muted-foreground flex items-center gap-2 text-xs font-medium uppercase tracking-wide">
                   <CalendarDays className="size-3.5" />
                   Date
                 </div>
-                <p className="text-sm leading-tight font-semibold">
+                <p className="text-sm font-semibold leading-tight">
                   {formatDate(event.date)}
                 </p>
               </CardContent>
             </Card>
-            <Card
-              className="border-l-4"
-              style={{ borderLeftColor: "var(--chart-2)" }}
-            >
+            <Card>
               <CardContent className="flex flex-col gap-1 p-4">
-                <div className="text-muted-foreground flex items-center gap-2 text-xs font-medium uppercase">
+                <div className="text-muted-foreground flex items-center gap-2 text-xs font-medium uppercase tracking-wide">
                   <MapPin className="size-3.5" />
                   Lieu
                 </div>
-                <p className="text-sm leading-tight font-semibold">
+                <p className="text-sm font-semibold leading-tight">
                   {event.location}
                 </p>
               </CardContent>
             </Card>
-            <Card
-              className="border-l-4"
-              style={{ borderLeftColor: "var(--chart-3)" }}
-            >
+            <Card>
               <CardContent className="flex flex-col gap-1 p-4">
-                <div className="text-muted-foreground flex items-center gap-2 text-xs font-medium uppercase">
+                <div className="text-muted-foreground flex items-center gap-2 text-xs font-medium uppercase tracking-wide">
                   <Users className="size-3.5" />
                   Inscrits
                 </div>
-                <p className="text-sm leading-tight font-semibold">
+                <p className="text-sm font-semibold leading-tight">
                   {registered} / {event.capacity}
                 </p>
               </CardContent>
             </Card>
           </div>
 
-          {/* Description mise en valeur */}
+          {/* Description */}
           {event.description ? (
-            <Card className="animate-fade-up-delay-2 gradient-border overflow-hidden border-transparent bg-accent/35">
-              <CardHeader className="relative z-[1] pb-3">
-                <CardTitle className="text-accent-foreground flex items-center gap-2 text-base">
+            <Card className="animate-fade-up-delay-2">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-muted-foreground flex items-center gap-2 text-sm font-medium">
                   <Info className="size-4" />
                   À propos de cet évènement
                 </CardTitle>
               </CardHeader>
-              <CardContent className="relative z-[1]">
-                <p className="text-foreground/90 text-base leading-relaxed whitespace-pre-wrap">
+              <CardContent>
+                <p className="text-foreground/90 text-sm leading-relaxed whitespace-pre-wrap">
                   {event.description}
                 </p>
               </CardContent>
@@ -148,12 +128,12 @@ export default async function EventDetailPage({ params }: PageProps) {
           )}
         </div>
 
-        {/* Colonne droite : capacité + formulaire */}
+        {/* Colonne droite */}
         <aside className="animate-fade-up-delay-3 flex flex-col gap-4 lg:sticky lg:top-20 lg:self-start">
           <EventCapacity event={event} />
           <Card>
             <CardHeader>
-              <CardTitle className="text-lg">S&apos;inscrire</CardTitle>
+              <CardTitle className="text-base">S&apos;inscrire</CardTitle>
             </CardHeader>
             <CardContent>
               {event.isFull ? (

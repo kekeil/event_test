@@ -5,6 +5,22 @@ Application de gestion d'évènements avec inscriptions en ligne et contrôle de
 - **Backend** : Spring Boot 4.0.6 / Java 21 — API REST, H2 in-memory, JWT, RFC 7807, Swagger
 - **Frontend** : Next.js 16 / React 19 / TypeScript — shadcn/ui, Tailwind 4, axios
 
+## Démo déployée (visionner en ligne)
+
+Instance d’exemple (Coolify / domaines de test) — à adapter si vos URLs diffèrent :
+
+| Ressource | URL |
+|-----------|-----|
+| **Application (frontend)** | https://frontend.event.test.salathia.pro |
+| **API REST (base)** | https://backend.event.test.salathia.pro |
+| **Swagger UI** (documentation interactive) | https://backend.event.test.salathia.pro/swagger-ui.html |
+| **OpenAPI JSON** | https://backend.event.test.salathia.pro/v3/api-docs |
+| **Console H2** | en général réservée au local : `http://localhost:8080/h2-console` (à ne pas exposer sur Internet en production) |
+
+En local, les équivalents sont `http://localhost:3000` (frontend), `http://localhost:8080` (API), `http://localhost:8080/swagger-ui.html` (Swagger).
+
+---
+
 ## Démarrage en une commande (Docker)
 
 Prérequis : **Docker** + **Docker Compose v2** (intégré à Docker Desktop ou paquet `docker-compose-plugin`).
@@ -28,14 +44,10 @@ Une fois les deux conteneurs démarrés :
 
 ### Déploiement (production)
 
-Exemple d’URLs une fois l’application exposée sur un domaine (à adapter à votre instance Coolify) :
+Les URLs publiques de la démo sont récapitulées en haut de ce README (**Démo déployée**). Côté configuration Coolify / variables d’environnement :
 
-| Service  | URL d’exemple |
-|----------|----------------|
-| Frontend | https://frontend.event.test.salathia.pro |
-| API      | Configurez `NEXT_PUBLIC_API_BASE_URL` côté frontend sur l’URL publique de l’API (ex. `https://api.votredomaine.tld`). |
-
-Côté backend, définissez `CORS_ALLOWED_ORIGINS` sur **exactement** l’origine du frontend (sans slash final), par exemple :
+- **Frontend** : `NEXT_PUBLIC_API_BASE_URL` = URL publique du backend (ex. `https://backend.event.test.salathia.pro`).
+- **Backend** : `CORS_ALLOWED_ORIGINS` = origine exacte du frontend (sans slash final), par exemple :
 
 ```env
 CORS_ALLOWED_ORIGINS=https://frontend.event.test.salathia.pro
