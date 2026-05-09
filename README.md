@@ -30,7 +30,7 @@ docker compose up --build
 
 ## Documentation détaillée
 
-- [README du backend](backend/README.md) — si présent dans le dépôt ; sinon se référer au `HELP.md` ou au code source.
+- [README du backend](backend/README.md)
 - [README du frontend](web/README.md) — installation, variables, Docker, structure.
 
 ## Grille du sujet — transparence
