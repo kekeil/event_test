@@ -18,7 +18,10 @@ import com.event.test.domain.dto.event.EventCreateRequest;
 import com.event.test.domain.dto.event.EventResponse;
 import com.event.test.domain.dto.event.EventUpdateRequest;
 import com.event.test.domain.dto.event.PageResponse;
+import com.event.test.domain.dto.registration.RegistrationCreateRequest;
+import com.event.test.domain.dto.registration.RegistrationResponse;
 import com.event.test.domain.service.EventService;
+import com.event.test.domain.service.RegistrationService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +32,7 @@ import lombok.RequiredArgsConstructor;
 public class EventController {
 
 	private final EventService eventService;
+	private final RegistrationService registrationService;
 
 	@GetMapping
 	public PageResponse<EventResponse> listEvents(
@@ -61,5 +65,17 @@ public class EventController {
 	public ResponseEntity<Void> deleteEvent(@PathVariable String id) {
 		eventService.delete(id);
 		return ResponseEntity.ok().build();
+	}
+
+	@PostMapping("/{id}/register")
+	public ResponseEntity<RegistrationResponse> register(
+			@PathVariable String id,
+			@Valid @RequestBody RegistrationCreateRequest request) {
+		RegistrationResponse body = registrationService.register(id, request);
+		URI location = ServletUriComponentsBuilder.fromCurrentContextPath()
+				.path("/api/registrations/{registrationId}")
+				.buildAndExpand(body.id())
+				.toUri();
+		return ResponseEntity.created(location).body(body);
 	}
 }
