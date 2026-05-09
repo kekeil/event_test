@@ -20,7 +20,9 @@ type EventCardProps = {
 
 export function EventCard({ event, index = 0 }: EventCardProps) {
   const full = event.isFull;
-  const ratio = event.capacity > 0 ? event.remainingSeats / event.capacity : 0;
+  const registered = Math.max(0, event.capacity - event.remainingSeats);
+  const lowRemaining =
+    event.capacity > 0 && event.remainingSeats / event.capacity <= 0.2;
 
   const delayClass =
     [
@@ -65,15 +67,24 @@ export function EventCard({ event, index = 0 }: EventCardProps) {
                 Complet
               </Badge>
             ) : (
-              <Badge variant="outline" className={cn(
-                "shrink-0 gap-1 text-xs",
-                ratio < 0.2
-                  ? "border-destructive/40 text-destructive"
-                  : "text-muted-foreground",
-              )}>
-                <Users className="size-3" />
-                {event.remainingSeats}/{event.capacity}
-              </Badge>
+              <div className="flex shrink-0 flex-col items-end gap-0.5">
+                <Badge
+                  variant="outline"
+                  className={cn(
+                    "gap-1 text-xs tabular-nums",
+                    lowRemaining
+                      ? "border-destructive/40 text-destructive"
+                      : "text-muted-foreground",
+                  )}
+                  title={`${event.remainingSeats} place${event.remainingSeats === 1 ? "" : "s"} restante${event.remainingSeats === 1 ? "" : "s"}`}
+                >
+                  <Users className="size-3" aria-hidden />
+                  {registered}/{event.capacity}
+                </Badge>
+                <span className="text-muted-foreground text-[10px] leading-none">
+                  inscrits
+                </span>
+              </div>
             )}
           </div>
         </CardHeader>
