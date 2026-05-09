@@ -179,7 +179,7 @@ npm run dev
 - ✅ **Écran 3 (optionnel)** — Création d'évènement (espace admin, validation client)
 - ✅ Espace admin : édition, suppression, gestion des inscriptions
 - ✅ Responsive ≥ 375px, mode clair/sombre
-- ✅ Aucun `console.log` côté client, erreurs visibles à l'écran (toasts top-right, 1 s)
+- ✅ Aucun `console.log` côté client, erreurs visibles à l'écran (toasts top-right, ~5,5 s)
 
 ---
 

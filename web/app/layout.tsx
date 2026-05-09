@@ -37,7 +37,7 @@ export default function RootLayout({
             richColors
             closeButton
             position="top-right"
-            duration={1000}
+            duration={5500}
           />
         </ThemeProvider>
       </body>
