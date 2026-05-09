@@ -26,6 +26,23 @@ Une fois les deux conteneurs démarrés :
 | Swagger UI    | http://localhost:8080/swagger-ui.html        |
 | Console H2    | http://localhost:8080/h2-console             |
 
+### Déploiement (production)
+
+Exemple d’URLs une fois l’application exposée sur un domaine (à adapter à votre instance Coolify) :
+
+| Service  | URL d’exemple |
+|----------|----------------|
+| Frontend | https://frontend.event.test.salathia.pro |
+| API      | Configurez `NEXT_PUBLIC_API_BASE_URL` côté frontend sur l’URL publique de l’API (ex. `https://api.votredomaine.tld`). |
+
+Côté backend, définissez `CORS_ALLOWED_ORIGINS` sur **exactement** l’origine du frontend (sans slash final), par exemple :
+
+```env
+CORS_ALLOWED_ORIGINS=https://frontend.event.test.salathia.pro
+```
+
+Au démarrage, les logs backend doivent afficher une ligne du type : `CORS configured with allowed origins: [...]`. Si la liste est vide ou ne contient pas votre domaine, la variable n’est pas prise en compte ou doit être corrigée (virgules, espaces, slash final).
+
 ### Compte admin par défaut
 
 - Email : `admin@event.local`

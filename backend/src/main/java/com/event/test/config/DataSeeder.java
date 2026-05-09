@@ -2,6 +2,7 @@ package com.event.test.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Component
 @Slf4j
+@Order(1)
 public class DataSeeder implements CommandLineRunner {
 
 	private final UserRepository userRepository;

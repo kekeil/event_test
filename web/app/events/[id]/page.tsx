@@ -46,12 +46,18 @@ export default async function EventDetailPage({ params }: PageProps) {
       </Link>
 
       {/* Hero */}
-      <section className="bg-hero-gradient rounded-2xl border p-6 sm:p-8">
-        <div className="flex flex-wrap items-start justify-between gap-4">
-          <div className="flex flex-col gap-3">
+      <section className="animate-fade-up relative overflow-hidden rounded-3xl border bg-hero-gradient p-6 sm:p-10">
+        <div
+          className="pointer-events-none absolute -right-12 top-0 size-40 rounded-full bg-primary/15 blur-3xl"
+          aria-hidden
+        />
+        <div className="relative flex flex-wrap items-start justify-between gap-4">
+          <div className="flex max-w-4xl flex-col gap-4">
             <div className="flex flex-wrap items-center gap-2">
               {event.isFull ? (
-                <Badge variant="destructive">Complet</Badge>
+                <Badge variant="destructive" className="animate-soft-pulse">
+                  Complet
+                </Badge>
               ) : (
                 <Badge
                   variant="outline"
@@ -62,14 +68,14 @@ export default async function EventDetailPage({ params }: PageProps) {
                 </Badge>
               )}
             </div>
-            <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
+            <h1 className="text-3xl font-bold tracking-tight sm:text-5xl">
               {event.title}
             </h1>
           </div>
         </div>
       </section>
 
-      <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_minmax(320px,400px)]">
+      <div className="animate-fade-up-delay-1 mt-6 grid gap-6 lg:grid-cols-[1fr_minmax(320px,400px)]">
         {/* Colonne gauche : infos + description */}
         <div className="flex flex-col gap-6">
           {/* Stats cards */}
@@ -120,14 +126,14 @@ export default async function EventDetailPage({ params }: PageProps) {
 
           {/* Description mise en valeur */}
           {event.description ? (
-            <Card className="border-accent-foreground/20 bg-accent/40">
-              <CardHeader className="pb-3">
+            <Card className="animate-fade-up-delay-2 gradient-border overflow-hidden border-transparent bg-accent/35">
+              <CardHeader className="relative z-[1] pb-3">
                 <CardTitle className="text-accent-foreground flex items-center gap-2 text-base">
                   <Info className="size-4" />
                   À propos de cet évènement
                 </CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="relative z-[1]">
                 <p className="text-foreground/90 text-base leading-relaxed whitespace-pre-wrap">
                   {event.description}
                 </p>
@@ -143,7 +149,7 @@ export default async function EventDetailPage({ params }: PageProps) {
         </div>
 
         {/* Colonne droite : capacité + formulaire */}
-        <aside className="flex flex-col gap-4 lg:sticky lg:top-20 lg:self-start">
+        <aside className="animate-fade-up-delay-3 flex flex-col gap-4 lg:sticky lg:top-20 lg:self-start">
           <EventCapacity event={event} />
           <Card>
             <CardHeader>

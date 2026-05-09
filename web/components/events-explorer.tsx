@@ -78,8 +78,8 @@ export function EventsExplorer({
         />
       ) : (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {items.map((ev) => (
-            <EventCard key={ev.id} event={ev} />
+          {items.map((ev, i) => (
+            <EventCard key={ev.id} event={ev} index={i} />
           ))}
         </div>
       )}
